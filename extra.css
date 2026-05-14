@@ -1,0 +1,240 @@
+/* Missing Tailwind Utilities */
+.w-\[340px\] {
+    width: 340px;
+}
+
+.h-\[340px\] {
+    height: 340px;
+}
+
+.h-\[320px\] {
+    height: 320px;
+}
+
+.w-\[140px\] {
+    width: 140px;
+}
+
+.h-\[140px\] {
+    height: 140px;
+}
+
+.min-w-\[120px\] {
+    min-width: 120px;
+}
+
+.min-h-\[250px\] {
+    min-height: 250px;
+}
+
+.min-h-\[420px\] {
+    min-height: 420px;
+}
+
+/* 3D Flip Card Utilities */
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.transform-style-3d {
+    transform-style: preserve-3d;
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+    transform: rotateY(180deg);
+}
+
+.card-inner {
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.project-card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+/* Ensure animate-spin-slow is defined if not already */
+.animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+    animation: spin-slow-reverse 20s linear infinite;
+}
+
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin-slow-reverse {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* --- New Styles for Portfolio Update --- */
+
+/* Glassmorphism Card Style */
+.glass-card {
+    background: rgba(10, 25, 47, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Tech Card specific style - Made more circular and prominent */
+.tech-card {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border: 2px solid rgba(56, 189, 248, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    position: relative;
+    overflow: visible;
+}
+
+.tech-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 20px;
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(139, 92, 246, 0.2));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.tech-card:hover::before {
+    opacity: 1;
+}
+
+.tech-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(56, 189, 248, 0.4),
+        0 0 0 1px rgba(56, 189, 248, 0.3) inset;
+    border-color: rgba(56, 189, 248, 0.6);
+}
+
+/* Orbit Buttons */
+.skill-orbit-btn {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.8);
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    z-index: 20;
+    text-align: center;
+    padding: 2px;
+}
+
+.skill-orbit-btn:hover,
+.skill-orbit-btn.active {
+    background: #0ea5e9;
+    color: white;
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.5);
+    transform: scale(1.1);
+    z-index: 30;
+}
+
+/* Social Icon Button Style */
+.social-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    transition: all 0.3s ease;
+}
+
+.social-icon-btn:hover {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    border-color: hsl(var(--primary));
+}
+
+@keyframes skillFade {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+#skill-grid {
+    transition: all 0.35s ease;
+}
+
+#skill-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.skill-tab {
+    backdrop-filter: blur(12px);
+}
