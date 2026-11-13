@@ -51,7 +51,7 @@
 
 .card-inner {
     transform-style: preserve-3d;
-    transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card.flipped .card-inner {
@@ -66,6 +66,51 @@
 
 .card-back {
     transform: rotateY(180deg);
+}
+
+/* Skill Tabs & Items */
+.skill-tab-btn {
+    cursor: pointer;
+    user-select: none;
+}
+
+#skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 0.75rem;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.skill-item {
+    flex: 0 1 112px;
+    width: 112px;
+    max-width: 125px;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+@media (min-width: 900px) {
+    #skills-grid {
+        flex-wrap: nowrap;
+    }
+    .skill-item {
+        flex: 0 0 auto;
+        width: 110px;
+    }
+}
+
+@media (min-width: 1100px) {
+    .skill-item {
+        width: 118px;
+    }
+}
+
+.invert {
+    filter: invert(1);
+    -webkit-filter: invert(1);
 }
 
 /* Ensure animate-spin-slow is defined if not already */

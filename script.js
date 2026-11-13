@@ -1,23 +1,67 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* --- 1. Flip Cards Logic --- */
+    /* --- 1. Mobile Navigation Menu Toggle --- */
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside or on a link
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        const mobileLinks = mobileMenu.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    }
+
+
+    /* --- 2. Flip Project Cards Logic (Desktop Hover + Mobile Tap) --- */
     const projectCards = document.querySelectorAll('.project-card');
     let activeCard = null;
 
     projectCards.forEach(card => {
+        // Desktop hover
         card.addEventListener('mouseenter', () => {
-            // Remove flipped class from previously active card
             if (activeCard && activeCard !== card) {
                 activeCard.classList.remove('flipped');
             }
-            // Add flipped class to current card
             card.classList.add('flipped');
             activeCard = card;
         });
+
+        // Click / Tap support (vital for mobile touchscreens)
+        card.addEventListener('click', (e) => {
+            // Don't toggle flip if clicking an action link directly
+            if (e.target.closest('a')) return;
+
+            const isFlipped = card.classList.contains('flipped');
+            if (activeCard && activeCard !== card) {
+                activeCard.classList.remove('flipped');
+            }
+            if (isFlipped) {
+                card.classList.remove('flipped');
+                activeCard = null;
+            } else {
+                card.classList.add('flipped');
+                activeCard = card;
+            }
+        });
     });
 
-    // Remove flipped class when moving away from all cards
+    // Remove flipped class when mouse leaves projects grid
     document.addEventListener('mousemove', (e) => {
+        if (!activeCard) return;
         const isOverCard = Array.from(projectCards).some(card => {
             const rect = card.getBoundingClientRect();
             return e.clientX >= rect.left && e.clientX <= rect.right &&
@@ -31,141 +75,216 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    /* --- 2. Skills Circular Layout Logic --- */
-    const skillsData = {
-        "Backend": [
-            { name: "NodeJS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-            { name: "Express", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
-            { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-            { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" }
-        ],
-        "Frontend": [
-            { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-            { name: "HTML5", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-            { name: "CSS3", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-            { name: "Tailwind", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" },
-            { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" }
-        ],
-        "Database": [
-            { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
-            { name: "MySQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-            { name: "PostgreSQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" }
-        ],
-        "Mobile": [
-            { name: "Flutter", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
-            { name: "React Native", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" }
-        ],
-        "AI/ML": [
-            { name: "TensorFlow", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
-            { name: "PyTorch", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" },
-            { name: "Pandas", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" }
-        ],
-        "IoT": [
-            { name: "Arduino", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" },
-            { name: "Raspberry Pi", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" }
-        ],
-        "Other": [
-            { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-            { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-            { name: "AWS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" }
-        ]
-    };
+    /* --- 3. Professional Skills Filter Tabs Logic --- */
+    const filterTabs = document.querySelectorAll('#skill-filter-tabs .skill-tab-btn');
+    const skillItems = document.querySelectorAll('#skills-grid .skill-item');
 
-    const orbitContainer = document.getElementById('skills-orbit');
-    if (!orbitContainer) return; // Guard clause
+    if (filterTabs.length > 0 && skillItems.length > 0) {
+        // Set initial state based on active tab (default: languages)
+        const activeTab = document.querySelector('#skill-filter-tabs .skill-tab-btn.active') || filterTabs[0];
+        const initialFilter = activeTab ? activeTab.getAttribute('data-filter') : 'languages';
 
-    const contentTitle = document.getElementById('skill-category-title');
-    const contentList = document.getElementById('skill-list');
-    const categories = Object.keys(skillsData);
-    const totalCategories = categories.length;
-
-    // Updated dimensions based on new HTML (340x340)
-    const containerSize = 340;
-    const center = containerSize / 2; // 170
-    const btnSize = 50;
-    const radius = 135; // Adjusted to fit within 340px container (170 + 135 + 25 = 330 < 340)
-
-    // Render Orbit Buttons
-    categories.forEach((category, index) => {
-        const btn = document.createElement('div');
-        btn.classList.add('skill-orbit-btn');
-        btn.textContent = category; // Full name
-        btn.setAttribute('title', category);
-
-        // Calculate position
-        const angle = (index / totalCategories) * 2 * Math.PI; // radians
-
-
-        const x = Math.cos(angle) * radius + center - (btnSize / 2);
-        const y = Math.sin(angle) * radius + center - (btnSize / 2);
-
-        btn.style.left = `${x}px`;
-        btn.style.top = `${y}px`;
-
-        btn.addEventListener('click', () => {
-            // Update active state
-            document.querySelectorAll('.skill-orbit-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            // Render Content
-            renderSkills(category);
+        skillItems.forEach(item => {
+            const category = item.getAttribute('data-category');
+            if (category === initialFilter) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
+            }
         });
 
-        orbitContainer.appendChild(btn);
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const filter = tab.getAttribute('data-filter');
+
+                // Update active tab styles
+                filterTabs.forEach(t => {
+                    t.classList.remove('active', 'bg-primary', 'text-primary-foreground', 'shadow-md', 'shadow-primary/20');
+                    t.classList.add('bg-card/60', 'border', 'border-border/80', 'text-muted-foreground');
+                });
+                tab.classList.add('active', 'bg-primary', 'text-primary-foreground', 'shadow-md', 'shadow-primary/20');
+                tab.classList.remove('bg-card/60', 'text-muted-foreground');
+
+                // Filter skills with subtle fade animation
+                skillItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    if (category === filter) {
+                        item.classList.remove('hidden');
+                        item.style.animation = 'none';
+                        void item.offsetWidth; // trigger reflow
+                        item.style.animation = 'fadeInUp 0.35s ease-out forwards';
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    }
+
+    /* --- 3.1 Resume Actions (View & Download PDF) --- */
+    const downloadResumeBtns = document.querySelectorAll('#hero-download-resume, a[download]');
+    downloadResumeBtns.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const fileUrl = btn.getAttribute('href') || './assets/resume.pdf';
+            const fileName = btn.getAttribute('download') || 'Eftekar_Hossen_Resume.pdf';
+
+            // If hosted over http/https, use fetch blob to guarantee file download
+            if (window.location.protocol.startsWith('http')) {
+                e.preventDefault();
+                try {
+                    const response = await fetch(fileUrl);
+                    if (!response.ok) throw new Error('Fetch failed');
+                    const blob = await response.blob();
+                    const blobUrl = window.URL.createObjectURL(blob);
+                    const tempAnchor = document.createElement('a');
+                    tempAnchor.style.display = 'none';
+                    tempAnchor.href = blobUrl;
+                    tempAnchor.download = fileName;
+                    document.body.appendChild(tempAnchor);
+                    tempAnchor.click();
+                    window.URL.revokeObjectURL(blobUrl);
+                    tempAnchor.remove();
+                } catch (err) {
+                    window.location.href = fileUrl;
+                }
+            }
+        });
     });
 
-    // Initial Render
-    if (categories.length > 0) {
-        // Select first one after a small delay to ensure DOM is ready? No, immediate is fine.
-        const firstBtn = orbitContainer.querySelector('.skill-orbit-btn');
-        if (firstBtn) firstBtn.click();
-    }
 
-    function renderSkills(category) {
-        contentTitle.textContent = category;
-        contentList.innerHTML = '';
-        const skills = skillsData[category];
+    /* --- 4. Working Contact Form Logic (FormSubmit AJAX + Feedback) --- */
+    const contactForm = document.getElementById('contact-form');
+    const contactStatus = document.getElementById('contact-form-status');
+    const submitBtn = document.getElementById('contact-submit-btn');
+    const submitBtnText = document.getElementById('submit-btn-text');
 
-        const rightCol = document.getElementById('skills-content');
-        rightCol.classList.remove('animate-fade-in-up');
-        void rightCol.offsetWidth;
-        rightCol.classList.add('animate-fade-in-up');
+    if (contactForm && submitBtn) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-        // Single horizontal row with scrolling, centered
-        contentList.className = "flex justify-center gap-4 w-full overflow-x-auto pb-2";
+            const nameInput = document.getElementById('contact-name');
+            const emailInput = document.getElementById('contact-email');
+            const subjectInput = document.getElementById('contact-subject');
+            const messageInput = document.getElementById('contact-message');
 
-        skills.forEach(skill => {
-            const skillCard = document.createElement('div');
-            skillCard.className = "tech-card w-[140px] h-[140px] flex flex-col items-center justify-center gap-3 p-4 rounded-3xl cursor-pointer group relative overflow-visible";
+            const name = nameInput ? nameInput.value.trim() : '';
+            const email = emailInput ? emailInput.value.trim() : '';
+            const subject = subjectInput && subjectInput.value.trim() ? subjectInput.value.trim() : 'New Portfolio Contact';
+            const message = messageInput ? messageInput.value.trim() : '';
 
-            // Use actual logo images
-            skillCard.innerHTML = `
-                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
-                <div class="w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-all duration-300 z-10">
-                    <img src="${skill.logo}" alt="${skill.name}" class="w-full h-full object-contain" />
-                </div>
-                <span class="font-semibold text-slate-200 text-xs tracking-wide group-hover:text-white transition-colors z-10 text-center">${skill.name}</span>
+            // Validation
+            if (!name || !email || !message) {
+                renderStatusMessage('Please fill in all required fields (Name, Email, Message).', 'error');
+                return;
+            }
+
+            // Simple email regex
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                renderStatusMessage('Please provide a valid email address.', 'error');
+                return;
+            }
+
+            // Set loading state
+            submitBtn.disabled = true;
+            const originalBtnContent = submitBtnText.innerHTML;
+            submitBtnText.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-slate-950 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Sending your message...</span>
             `;
-            contentList.appendChild(skillCard);
+
+            try {
+                const formData = new FormData(contactForm);
+
+                // Send via FormSubmit AJAX endpoint directly to user's email
+                const response = await fetch("https://formsubmit.co/ajax/eftekarhossen3223@gmail.com", {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok && (data.success === "true" || data.success === true || data.message)) {
+                    renderStatusMessage(
+                        'Thank you! Your message has been sent successfully. Eftekar will receive it directly at eftekarhossen3223@gmail.com and get back to you soon.',
+                        'success'
+                    );
+                    contactForm.reset();
+                } else {
+                    throw new Error(data.message || 'Submission failed');
+                }
+            } catch (err) {
+                console.warn('FormSubmit AJAX issue, showing fallback option:', err);
+                const mailtoUrl = `mailto:eftekarhossen3223@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message)}`;
+                renderStatusMessage(
+                    `Network notice: Could not dispatch directly via web API. <a href="${mailtoUrl}" class="underline font-bold text-white hover:text-primary ml-1">Click here to send directly via your Email client &rarr;</a>`,
+                    'warning'
+                );
+            } finally {
+                submitBtn.disabled = false;
+                submitBtnText.innerHTML = originalBtnContent;
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
+            }
         });
     }
 
+    function renderStatusMessage(msg, type) {
+        if (!contactStatus) return;
+        contactStatus.classList.remove('hidden');
 
-    /* --- 3. Show More / Show Less Logic --- */
+        if (type === 'success') {
+            contactStatus.className = 'p-4 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 text-xs sm:text-sm flex items-start gap-3 animate-fade-in-up';
+            contactStatus.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 text-emerald-400 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <div class="leading-relaxed">${msg}</div>
+            `;
+        } else if (type === 'warning') {
+            contactStatus.className = 'p-4 rounded-2xl border border-amber-500/40 bg-amber-500/10 text-amber-300 text-xs sm:text-sm flex items-start gap-3 animate-fade-in-up';
+            contactStatus.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 text-amber-400 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+                <div class="leading-relaxed">${msg}</div>
+            `;
+        } else {
+            contactStatus.className = 'p-4 rounded-2xl border border-rose-500/40 bg-rose-500/10 text-rose-400 text-xs sm:text-sm flex items-start gap-3 animate-fade-in-up';
+            contactStatus.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 text-rose-400 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+                <div class="leading-relaxed">${msg}</div>
+            `;
+        }
+    }
+
+
+    /* --- 5. Show More / Show Less Logic --- */
     function setupShowMore(btnId, gridId) {
         const btn = document.getElementById(btnId);
         const grid = document.getElementById(gridId);
 
         if (!btn || !grid) return;
 
-        // Store references to the items that are hidden by default
         const hiddenItems = Array.from(grid.querySelectorAll('.hidden-item'));
+        if (hiddenItems.length === 0) {
+            btn.parentElement?.classList.add('hidden');
+            return;
+        }
 
         btn.addEventListener('click', () => {
             const isExpanded = btn.getAttribute('data-expanded') === 'true';
 
             if (!isExpanded) {
-                // Expand: Show all hidden items
                 hiddenItems.forEach(item => {
                     item.classList.remove('hidden-item', 'hidden');
                     item.classList.add('animate-fade-in-up');
@@ -173,7 +292,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.textContent = 'Show Less';
                 btn.setAttribute('data-expanded', 'true');
             } else {
-                // Collapse: Hide items again
                 hiddenItems.forEach(item => {
                     item.classList.add('hidden-item', 'hidden');
                     item.classList.remove('animate-fade-in-up');
@@ -181,8 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.textContent = 'Show More';
                 btn.setAttribute('data-expanded', 'false');
 
-                // Smooth scroll back to the start of the grid or section
-                // Using 'nearest' or 'center' might be better to keep context
                 const section = grid.closest('section');
                 if (section) {
                     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -195,4 +311,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setupShowMore('show-more-blog', 'blog-grid');
     setupShowMore('show-more-activities', 'activities-grid');
 
+    // Initialize Lucide icons if available
+    if (window.lucide) {
+        lucide.createIcons();
+    }
 });

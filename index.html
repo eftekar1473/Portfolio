@@ -35,12 +35,12 @@
     <main class="min-h-screen">
         <!-- Header -->
        <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-4">
-  <nav class="flex items-center justify-between rounded-full border border-white/10 bg-background/70 backdrop-blur-xl px-6 py-3 shadow-lg">
+  <nav class="flex items-center justify-between rounded-full border border-white/10 bg-background/80 backdrop-blur-xl px-6 py-3 shadow-lg shadow-black/20">
 
     <!-- Logo (Left) -->
-    <a href="#" class="text-lg font-bold tracking-tight text-foreground">
-      <span class="text-white hover:text-cyan-400 transition">eftekar</span>
-      <span class="text-cyan-400 hover:text-white transition"> hossen</span>
+    <a href="#" class="text-lg font-bold tracking-tight text-foreground group">
+      <span class="text-white group-hover:text-primary transition-colors">eftekar</span>
+      <span class="text-primary group-hover:text-white transition-colors"> hossen</span>
     </a>
 
     <!-- Right Side (Menu + CTA) -->
@@ -48,16 +48,22 @@
 
       <!-- Menu -->
       <ul class="flex items-center gap-6 text-sm font-medium">
-        <li><a href="#projects" class="text-muted-foreground hover:text-white transition">Projects</a></li>
-        <li><a href="#skills" class="text-muted-foreground hover:text-white transition">Skills</a></li>
-        <li><a href="#blog" class="text-muted-foreground hover:text-white transition">Activities</a></li>
+        <li><a href="#projects" class="text-muted-foreground hover:text-white transition-colors">Projects</a></li>
+        <li><a href="#skills" class="text-muted-foreground hover:text-white transition-colors">Skills</a></li>
+        <li><a href="#blog" class="text-muted-foreground hover:text-white transition-colors">Activities</a></li>
+        <li>
+          <a href="assets/resume.pdf" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5">
+            <span>Resume</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+          </a>
+        </li>
       </ul>
 
       <!-- CTA Button -->
       <a href="#contact"
-        class="px-5 py-2 rounded-full text-sm font-semibold text-white 
-               bg-gradient-to-r from-blue-500 to-purple-500 
-               hover:opacity-90 transition shadow-md">
+        class="px-5 py-2 rounded-full text-sm font-semibold text-primary-foreground
+               bg-primary hover:bg-primary/90
+               shadow-md shadow-primary/25 hover:shadow-primary/40 hover:scale-105 active:scale-95 transition-all">
         Let's Talk
       </a>
 
@@ -65,6 +71,7 @@
 
     <!-- Mobile Menu Button -->
     <button
+      id="mobile-menu-btn"
       class="md:hidden text-white p-2 rounded-md hover:bg-white/10 transition"
       aria-label="Open menu">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
@@ -75,6 +82,20 @@
     </button>
 
   </nav>
+
+  <!-- Mobile Dropdown Menu -->
+  <div id="mobile-menu" class="hidden md:hidden mt-2 p-4 rounded-2xl border border-white/10 bg-background/95 backdrop-blur-2xl shadow-xl flex flex-col gap-3">
+    <a href="#projects" class="mobile-link px-3 py-2 rounded-lg text-sm font-medium text-foreground hover:bg-white/10 transition">Projects</a>
+    <a href="#skills" class="mobile-link px-3 py-2 rounded-lg text-sm font-medium text-foreground hover:bg-white/10 transition">Skills</a>
+    <a href="#blog" class="mobile-link px-3 py-2 rounded-lg text-sm font-medium text-foreground hover:bg-white/10 transition">Activities</a>
+    <a href="assets/resume.pdf" target="_blank" rel="noopener noreferrer" class="mobile-link px-3 py-2 rounded-lg text-sm font-medium text-primary hover:bg-primary/10 transition flex items-center justify-between">
+      <span>View Resume</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+    </a>
+    <a href="#contact" class="mobile-link px-4 py-2.5 rounded-xl text-center text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition">
+      Let's Talk
+    </a>
+  </div>
        </header>
 
         <!-- Hero Section -->
@@ -130,18 +151,30 @@
                             </svg></a>
                     </div>
 
-                    <div class="animate-fade-in-up animate-delay-400">
-                        <a href="assets/resume.pdf" download="Eftekar_Hossen_Resume.pdf"
-                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 gap-2 bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <div class="flex flex-wrap items-center gap-3 animate-fade-in-up animate-delay-400">
+                        <a href="assets/resume.pdf" target="_blank" rel="noopener noreferrer" id="hero-view-resume"
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-11 px-5 py-2 gap-2 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-lg shadow-primary/20 hover:scale-[1.03] active:scale-[0.98]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-file-text">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                <path d="M10 9H8"></path>
+                                <path d="M16 13H8"></path>
+                                <path d="M16 17H8"></path>
+                            </svg>
+                            <span>View Resume</span>
+                        </a>
+                        <a href="assets/resume.pdf" download="Eftekar_Hossen_Resume.pdf" id="hero-download-resume"
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-11 px-5 py-2 gap-2 border border-border/80 bg-card/60 text-foreground hover:bg-accent hover:border-primary/50 font-medium hover:scale-[1.02] active:scale-[0.98]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-arrow-down-to-line h-4 w-4"
-                                aria-hidden="true">
+                                stroke-linejoin="round" class="lucide lucide-arrow-down-to-line text-primary">
                                 <path d="M12 17V3"></path>
                                 <path d="m6 11 6 6 6-6"></path>
                                 <path d="M19 21H5"></path>
                             </svg>
-                            Resume
+                            <span>Download PDF</span>
                         </a>
                     </div>
                 </div>
@@ -161,282 +194,341 @@
         <!-- Projects Section -->
         <section id="projects" class="px-6 py-20">
             <div class="mx-auto max-w-6xl">
-                <div class="flex items-end justify-between gap-4 mb-10">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
                     <div>
-                        <h2 class="font-heading text-2xl font-bold text-foreground sm:text-3xl">Responsibilities ?</h2>
-                        <p class="mt-1 text-sm text-muted-foreground">I turn them into systems</p>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
+                            Portfolio Highlights
+                        </div>
+                        <h2 class="font-heading text-2xl font-bold text-foreground sm:text-3xl">Featured Projects</h2>
+                        <p class="mt-1 text-sm text-muted-foreground">Software systems, mobile applications, and engineering solutions from my resume.</p>
                     </div>
+                    <a href="https://github.com/eftekar1473" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+                        <span>See more on GitHub</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </a>
                 </div>
 
                 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" id="projects-grid">
-                    <!-- Visible Projects (1-6) -->
-                    <!-- Project 1 -->
-                    <div class="project-card relative h-[320px] w-full perspective-1000 cursor-pointer">
-                        <div
-                            class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-xl bg-card">
-                            <div
-                                class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-xl flex flex-col">
-                                <div class="relative h-48 w-full overflow-hidden">
-                                    <img alt="Thinkify" class="object-cover h-full w-full"
-                                        src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&amp;h=400&amp;fit=crop" />
+                    <!-- Project 1: ParkFinity -->
+                    <div class="project-card relative h-[360px] w-full perspective-1000 cursor-pointer">
+                        <div class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-2xl bg-card shadow-lg hover:border-primary/50 transition-colors">
+                            <div class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-2xl flex flex-col justify-between">
+                                <div class="relative h-44 w-full overflow-hidden">
+                                    <img alt="ParkFinity: Smart Parking System" class="object-cover h-full w-full"
+                                        src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=600&amp;h=400&amp;fit=crop" />
+                                    <span class="absolute top-3 right-3 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-background/80 backdrop-blur-md text-primary border border-primary/20">
+                                        Mobile &amp; Backend
+                                    </span>
                                 </div>
-                                <div class="p-4 flex-1 bg-card">
-                                    <h3 class="font-heading text-xl font-bold text-foreground">Thinkify</h3>
-                                    <p class="mt-1 text-sm text-muted-foreground">Connecting Ideas, Inspiring
-                                        Perspectives</p>
-                                </div>
-                            </div>
-                            <div
-                                class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card border border-primary/50 p-6 flex flex-col justify-center items-center text-center">
-                                <h3 class="font-heading text-xl font-bold text-primary mb-2">Thinkify</h3>
-                                <p class="text-sm text-muted-foreground mb-6">Tech stack: React, Node, MongoDB.</p>
-                                <div class="flex gap-4">
-                                    <a href="#" target="_blank"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Code</a>
-                                    <a href="#" target="_blank"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Live</a>
+                                <div class="p-5 flex-1 flex flex-col justify-between bg-card">
+                                    <div>
+                                        <h3 class="font-heading text-lg font-bold text-foreground group-hover:text-primary transition-colors">ParkFinity: Smart Parking System</h3>
+                                        <p class="mt-1 text-xs text-muted-foreground line-clamp-2">Smart parking management with Flutter mobile app, live booking, and web dashboard.</p>
+                                    </div>
+                                    <div class="pt-3 border-t border-border/40 flex items-center justify-between">
+                                        <div class="flex flex-wrap gap-1.5">
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">Flutter</span>
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">Node.js</span>
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">PostgreSQL</span>
+                                        </div>
+                                        <span class="text-[11px] text-primary flex items-center gap-1 font-medium">Details ↻</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-card relative h-[320px] w-full perspective-1000 cursor-pointer">
-                        <div
-                            class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-xl bg-card">
-                            <div
-                                class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-xl flex flex-col">
-                                <div class="relative h-48 w-full overflow-hidden">
-                                    <img alt="VroomGo" class="object-cover h-full w-full"
-                                        src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&amp;h=250&amp;fit=crop" />
+                            <div class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-card border border-primary/60 p-6 flex flex-col justify-between text-left shadow-2xl">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="font-heading text-base font-bold text-primary">ParkFinity: Smart Parking</h3>
+                                        <span class="text-[10px] px-2 py-0.5 rounded bg-primary/20 text-primary font-medium">SRS &amp; Full-Stack</span>
+                                    </div>
+                                    <ul class="text-xs text-muted-foreground space-y-2 mt-3 list-disc list-inside leading-relaxed">
+                                        <li>Developed smart parking management with Flutter mobile app and admin dashboard.</li>
+                                        <li>Implemented Firebase Auth, real-time push alerts, and Google Maps live discovery.</li>
+                                        <li>Engineered RESTful APIs and PostgreSQL database to manage live parking bookings.</li>
+                                    </ul>
                                 </div>
-                                <div class="p-4 flex-1 bg-card">
-                                    <h3 class="font-heading text-xl font-bold text-foreground">VroomGo</h3>
-                                    <p class="mt-1 text-sm text-muted-foreground">Rent a Car, Embark on Your Journey</p>
-                                </div>
-                            </div>
-                            <div
-                                class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card border border-primary/50 p-6 flex flex-col justify-center items-center text-center">
-                                <h3 class="font-heading text-xl font-bold text-primary mb-2">VroomGo</h3>
-                                <p class="text-sm text-muted-foreground mb-6">Car rental platform.</p>
-                                <div class="flex gap-4">
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Code</a>
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Live</a>
+                                <div class="flex items-center gap-3 pt-4 border-t border-border/50">
+                                    <a href="https://github.com/eftekar1473/ParkFinity-Final.git" target="_blank" rel="noopener noreferrer"
+                                        class="flex-1 text-center py-2 px-3 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition shadow-sm">
+                                        GitHub Code
+                                    </a>
+                                    <a href="https://drive.google.com/file/d/13AEvqaRDtqyyx6lhl9sat2STficVM8Ef/view?usp=drive_link" target="_blank" rel="noopener noreferrer"
+                                        class="flex-1 text-center py-2 px-3 rounded-lg border border-border bg-background/50 hover:bg-accent text-xs font-medium text-foreground transition">
+                                        Demo Video
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project 3 -->
-                    <div class="project-card relative h-[320px] w-full perspective-1000 cursor-pointer">
-                        <div
-                            class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-xl bg-card">
-                            <div
-                                class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-xl flex flex-col">
-                                <div class="relative h-48 w-full overflow-hidden">
-                                    <img alt="Joinify" class="object-cover h-full w-full"
-                                        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&amp;h=250&amp;fit=crop" />
+                    <!-- Project 2: Hello NSTUian -->
+                    <div class="project-card relative h-[360px] w-full perspective-1000 cursor-pointer">
+                        <div class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-2xl bg-card shadow-lg hover:border-primary/50 transition-colors">
+                            <div class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-2xl flex flex-col justify-between">
+                                <div class="relative h-44 w-full overflow-hidden">
+                                    <img alt="Hello NSTUian Question Bank" class="object-cover h-full w-full"
+                                        src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600&amp;h=400&amp;fit=crop" />
+                                    <span class="absolute top-3 right-3 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-background/80 backdrop-blur-md text-primary border border-primary/20">
+                                        Web Platform
+                                    </span>
                                 </div>
-                                <div class="p-4 flex-1 bg-card">
-                                    <h3 class="font-heading text-xl font-bold text-foreground">Joinify</h3>
-                                    <p class="mt-1 text-sm text-muted-foreground">Unify Campus Student Organizations</p>
-                                </div>
-                            </div>
-                            <div
-                                class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card border border-primary/50 p-6 flex flex-col justify-center items-center text-center">
-                                <h3 class="font-heading text-xl font-bold text-primary mb-2">Joinify</h3>
-                                <p class="text-sm text-muted-foreground mb-6">Student org management.</p>
-                                <div class="flex gap-4">
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Code</a>
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Live</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 4 (Dummy) -->
-                    <div class="project-card relative h-[320px] w-full perspective-1000 cursor-pointer">
-                        <div
-                            class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-xl bg-card">
-                            <div
-                                class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-xl flex flex-col">
-                                <div class="relative h-48 w-full overflow-hidden">
-                                    <img alt="EcoTrack" class="object-cover h-full w-full"
-                                        src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&amp;h=250&amp;fit=crop" />
-                                </div>
-                                <div class="p-4 flex-1 bg-card">
-                                    <h3 class="font-heading text-xl font-bold text-foreground">EcoTrack</h3>
-                                    <p class="mt-1 text-sm text-muted-foreground">Sustainability Monitoring</p>
+                                <div class="p-5 flex-1 flex flex-col justify-between bg-card">
+                                    <div>
+                                        <h3 class="font-heading text-lg font-bold text-foreground">Hello NSTUian</h3>
+                                        <p class="mt-1 text-xs text-muted-foreground line-clamp-2">Centralized academic question bank for NSTU students organized by department &amp; session.</p>
+                                    </div>
+                                    <div class="pt-3 border-t border-border/40 flex items-center justify-between">
+                                        <div class="flex flex-wrap gap-1.5">
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">React</span>
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">PostgreSQL</span>
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">RBAC</span>
+                                        </div>
+                                        <span class="text-[11px] text-primary flex items-center gap-1 font-medium">Details ↻</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div
-                                class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card border border-primary/50 p-6 flex flex-col justify-center items-center text-center">
-                                <h3 class="font-heading text-xl font-bold text-primary mb-2">EcoTrack</h3>
-                                <p class="text-sm text-muted-foreground mb-6">Tracking carbon footprint.</p>
-                                <div class="flex gap-4">
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Code</a>
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Live</a>
+                            <div class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-card border border-primary/60 p-6 flex flex-col justify-between text-left shadow-2xl">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="font-heading text-base font-bold text-primary">Hello NSTUian</h3>
+                                        <span class="text-[10px] px-2 py-0.5 rounded bg-primary/20 text-primary font-medium">University Portal</span>
+                                    </div>
+                                    <ul class="text-xs text-muted-foreground space-y-2 mt-3 list-disc list-inside leading-relaxed">
+                                        <li>Centralized repository to access previous-year exam questions by department, course, and session.</li>
+                                        <li>Integrated PDF and image uploads with authenticated student contribution workflows.</li>
+                                        <li>Designed role-based access control (RBAC) and department admin auditing for content quality.</li>
+                                    </ul>
+                                </div>
+                                <div class="flex items-center gap-3 pt-4 border-t border-border/50">
+                                    <a href="https://github.com/eftekar1473/Hello-NSTUian.git" target="_blank" rel="noopener noreferrer"
+                                        class="flex-1 text-center py-2 px-3 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition shadow-sm">
+                                        GitHub Code
+                                    </a>
+                                    <a href="https://client-ten-tau-59.vercel.app/" target="_blank" rel="noopener noreferrer"
+                                        class="flex-1 text-center py-2 px-3 rounded-lg border border-border bg-background/50 hover:bg-accent text-xs font-medium text-foreground transition">
+                                        Live View
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project 5 (Dummy) -->
-                    <div class="project-card relative h-[320px] w-full perspective-1000 cursor-pointer">
-                        <div
-                            class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-xl bg-card">
-                            <div
-                                class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-xl flex flex-col">
-                                <div class="relative h-48 w-full overflow-hidden">
-                                    <img alt="CloudSync" class="object-cover h-full w-full"
-                                        src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&amp;h=250&amp;fit=crop" />
+                    <!-- Project 3: NSTU BNCC Website -->
+                    <div class="project-card relative h-[360px] w-full perspective-1000 cursor-pointer">
+                        <div class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-2xl bg-card shadow-lg hover:border-primary/50 transition-colors">
+                            <div class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-2xl flex flex-col justify-between">
+                                <div class="relative h-44 w-full overflow-hidden">
+                                    <img alt="NSTU BNCC Website" class="object-cover h-full w-full"
+                                        src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&amp;h=400&amp;fit=crop" />
+                                    <span class="absolute top-3 right-3 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-background/80 backdrop-blur-md text-primary border border-primary/20">
+                                        Cadet Portal
+                                    </span>
                                 </div>
-                                <div class="p-4 flex-1 bg-card">
-                                    <h3 class="font-heading text-xl font-bold text-foreground">CloudSync</h3>
-                                    <p class="mt-1 text-sm text-muted-foreground">Distributed File Storage</p>
-                                </div>
-                            </div>
-                            <div
-                                class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card border border-primary/50 p-6 flex flex-col justify-center items-center text-center">
-                                <h3 class="font-heading text-xl font-bold text-primary mb-2">CloudSync</h3>
-                                <p class="text-sm text-muted-foreground mb-6">Secure cloud storage.</p>
-                                <div class="flex gap-4">
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Code</a>
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Live</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 6 (Dummy) -->
-                    <div class="project-card relative h-[320px] w-full perspective-1000 cursor-pointer">
-                        <div
-                            class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-xl bg-card">
-                            <div
-                                class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-xl flex flex-col">
-                                <div class="relative h-48 w-full overflow-hidden">
-                                    <img alt="TaskMaster" class="object-cover h-full w-full"
-                                        src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&amp;h=250&amp;fit=crop" />
-                                </div>
-                                <div class="p-4 flex-1 bg-card">
-                                    <h3 class="font-heading text-xl font-bold text-foreground">TaskMaster</h3>
-                                    <p class="mt-1 text-sm text-muted-foreground">Productivity Suite</p>
+                                <div class="p-5 flex-1 flex flex-col justify-between bg-card">
+                                    <div>
+                                        <h3 class="font-heading text-lg font-bold text-foreground">NSTU BNCC Website</h3>
+                                        <p class="mt-1 text-xs text-muted-foreground line-clamp-2">Dynamic website to showcase organizational events, corps activities, and achievements.</p>
+                                    </div>
+                                    <div class="pt-3 border-t border-border/40 flex items-center justify-between">
+                                        <div class="flex flex-wrap gap-1.5">
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">JavaScript</span>
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">HTML5/CSS3</span>
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">PostgreSQL</span>
+                                        </div>
+                                        <span class="text-[11px] text-primary flex items-center gap-1 font-medium">Details ↻</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div
-                                class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card border border-primary/50 p-6 flex flex-col justify-center items-center text-center">
-                                <h3 class="font-heading text-xl font-bold text-primary mb-2">TaskMaster</h3>
-                                <p class="text-sm text-muted-foreground mb-6">Manage tasks efficiently.</p>
-                                <div class="flex gap-4">
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Code</a>
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Live</a>
+                            <div class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-card border border-primary/60 p-6 flex flex-col justify-between text-left shadow-2xl">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="font-heading text-base font-bold text-primary">NSTU BNCC Website</h3>
+                                        <span class="text-[10px] px-2 py-0.5 rounded bg-primary/20 text-primary font-medium">Mainamati Regiment</span>
+                                    </div>
+                                    <ul class="text-xs text-muted-foreground space-y-2 mt-3 list-disc list-inside leading-relaxed">
+                                        <li>Developed dynamic website for NSTU BNCC showcasing organizational info, ranks, and events.</li>
+                                        <li>Designed structured navigation, responsive layouts, and cross-device optimization.</li>
+                                        <li>Engineered modular frontend architecture to support dynamic event updates and media galleries.</li>
+                                    </ul>
+                                </div>
+                                <div class="flex items-center gap-3 pt-4 border-t border-border/50">
+                                    <a href="https://github.com/eftekar1473/NSTU-BNCC.git" target="_blank" rel="noopener noreferrer"
+                                        class="flex-1 text-center py-2 px-3 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition shadow-sm">
+                                        GitHub Code
+                                    </a>
+                                    <a href="https://nstu-bncc.vercel.app" target="_blank" rel="noopener noreferrer"
+                                        class="flex-1 text-center py-2 px-3 rounded-lg border border-border bg-background/50 hover:bg-accent text-xs font-medium text-foreground transition">
+                                        Live Site
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Hidden Projects (7-9) -->
-                    <div
-                        class="project-card hidden-item hidden relative h-[320px] w-full perspective-1000 cursor-pointer">
-                        <div
-                            class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-xl bg-card">
-                            <div
-                                class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-xl flex flex-col">
-                                <div class="relative h-48 w-full overflow-hidden">
-                                    <img alt="Project 7" class="object-cover h-full w-full"
-                                        src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=400&amp;h=250&amp;fit=crop" />
+                    <!-- Project 4: 2D Moto Racing Game -->
+                    <div class="project-card relative h-[360px] w-full perspective-1000 cursor-pointer">
+                        <div class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-2xl bg-card shadow-lg hover:border-primary/50 transition-colors">
+                            <div class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-2xl flex flex-col justify-between">
+                                <div class="relative h-44 w-full overflow-hidden">
+                                    <img alt="2D Moto Racing Game" class="object-cover h-full w-full"
+                                        src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&amp;h=400&amp;fit=crop" />
+                                    <span class="absolute top-3 right-3 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-background/80 backdrop-blur-md text-primary border border-primary/20">
+                                        Game Development
+                                    </span>
                                 </div>
-                                <div class="p-4 flex-1 bg-card">
-                                    <h3 class="font-heading text-xl font-bold text-foreground">DevDash</h3>
-                                    <p class="mt-1 text-sm text-muted-foreground">Developer Dashboard</p>
-                                </div>
-                            </div>
-                            <div
-                                class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card border border-primary/50 p-6 flex flex-col justify-center items-center text-center">
-                                <h3 class="font-heading text-xl font-bold text-primary mb-2">DevDash</h3>
-                                <p class="text-sm text-muted-foreground mb-6">Analytics for devs.</p>
-                                <div class="flex gap-4">
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Code</a>
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Live</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="project-card hidden-item hidden relative h-[320px] w-full perspective-1000 cursor-pointer">
-                        <div
-                            class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-xl bg-card">
-                            <div
-                                class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-xl flex flex-col">
-                                <div class="relative h-48 w-full overflow-hidden">
-                                    <img alt="Project 8" class="object-cover h-full w-full"
-                                        src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&amp;h=250&amp;fit=crop" />
-                                </div>
-                                <div class="p-4 flex-1 bg-card">
-                                    <h3 class="font-heading text-xl font-bold text-foreground">NotesApp</h3>
-                                    <p class="mt-1 text-sm text-muted-foreground">Markdown Note Taker</p>
+                                <div class="p-5 flex-1 flex flex-col justify-between bg-card">
+                                    <div>
+                                        <h3 class="font-heading text-lg font-bold text-foreground">2D Moto Racing Game</h3>
+                                        <p class="mt-1 text-xs text-muted-foreground line-clamp-2">Interactive desktop game built with Java Swing and custom 60 FPS physics engine.</p>
+                                    </div>
+                                    <div class="pt-3 border-t border-border/40 flex items-center justify-between">
+                                        <div class="flex flex-wrap gap-1.5">
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">Java</span>
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">Swing &amp; AWT</span>
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">60 FPS</span>
+                                        </div>
+                                        <span class="text-[11px] text-primary flex items-center gap-1 font-medium">Details ↻</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div
-                                class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card border border-primary/50 p-6 flex flex-col justify-center items-center text-center">
-                                <h3 class="font-heading text-xl font-bold text-primary mb-2">NotesApp</h3>
-                                <p class="text-sm text-muted-foreground mb-6">Simple notes.</p>
-                                <div class="flex gap-4">
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Code</a>
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Live</a>
+                            <div class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-card border border-primary/60 p-6 flex flex-col justify-between text-left shadow-2xl">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="font-heading text-base font-bold text-primary">2D Moto Racing Game</h3>
+                                        <span class="text-[10px] px-2 py-0.5 rounded bg-primary/20 text-primary font-medium">Desktop Arcade</span>
+                                    </div>
+                                    <ul class="text-xs text-muted-foreground space-y-2 mt-3 list-disc list-inside leading-relaxed">
+                                        <li>Built interactive 2D desktop racing game using Java Swing and AWT with custom JPanel rendering.</li>
+                                        <li>Single-player and multiplayer racing modes featuring independent WASD and Arrow controls.</li>
+                                        <li>Custom game loop using javax.swing.Timer for smooth 60 FPS physics and collision detection.</li>
+                                    </ul>
+                                </div>
+                                <div class="flex items-center gap-3 pt-4 border-t border-border/50">
+                                    <a href="https://github.com/eftekar1473/2D-Moto-Racing.git" target="_blank" rel="noopener noreferrer"
+                                        class="flex-1 text-center py-2 px-3 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition shadow-sm">
+                                        GitHub Code
+                                    </a>
+                                    <a href="https://drive.google.com/file/d/1lifUrX3ORfv4v6Sn-0ZcwTjDHh-X17mx/view?usp=drive_link" target="_blank" rel="noopener noreferrer"
+                                        class="flex-1 text-center py-2 px-3 rounded-lg border border-border bg-background/50 hover:bg-accent text-xs font-medium text-foreground transition">
+                                        Play Demo
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div
-                        class="project-card hidden-item hidden relative h-[320px] w-full perspective-1000 cursor-pointer">
-                        <div
-                            class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-xl bg-card">
-                            <div
-                                class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-xl flex flex-col">
-                                <div class="relative h-48 w-full overflow-hidden">
-                                    <img alt="Project 9" class="object-cover h-full w-full"
-                                        src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&amp;h=250&amp;fit=crop" />
+
+                    <!-- Project 5: AIDLINE -->
+                    <div class="project-card relative h-[360px] w-full perspective-1000 cursor-pointer">
+                        <div class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-2xl bg-card shadow-lg hover:border-primary/50 transition-colors">
+                            <div class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-2xl flex flex-col justify-between">
+                                <div class="relative h-44 w-full overflow-hidden">
+                                    <img alt="AIDLINE: Medical Assistance System" class="object-cover h-full w-full"
+                                        src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&amp;h=400&amp;fit=crop" />
+                                    <span class="absolute top-3 right-3 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-background/80 backdrop-blur-md text-primary border border-primary/20">
+                                        Software Engineering
+                                    </span>
                                 </div>
-                                <div class="p-4 flex-1 bg-card">
-                                    <h3 class="font-heading text-xl font-bold text-foreground">WeatherIO</h3>
-                                    <p class="mt-1 text-sm text-muted-foreground">Real-time Weather</p>
+                                <div class="p-5 flex-1 flex flex-col justify-between bg-card">
+                                    <div>
+                                        <h3 class="font-heading text-lg font-bold text-foreground">AIDLINE: Medical Assistance</h3>
+                                        <p class="mt-1 text-xs text-muted-foreground line-clamp-2">Complete SRS, UML architecture, and interactive prototype for a digital consultation system.</p>
+                                    </div>
+                                    <div class="pt-3 border-t border-border/40 flex items-center justify-between">
+                                        <div class="flex flex-wrap gap-1.5">
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">SRS</span>
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">UML / DFD</span>
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">UI Prototype</span>
+                                        </div>
+                                        <span class="text-[11px] text-primary flex items-center gap-1 font-medium">Details ↻</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div
-                                class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-xl bg-card border border-primary/50 p-6 flex flex-col justify-center items-center text-center">
-                                <h3 class="font-heading text-xl font-bold text-primary mb-2">WeatherIO</h3>
-                                <p class="text-sm text-muted-foreground mb-6">Weather forecast app.</p>
-                                <div class="flex gap-4">
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Code</a>
-                                    <a href="#"
-                                        class="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">Live</a>
+                            <div class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-card border border-primary/60 p-6 flex flex-col justify-between text-left shadow-2xl">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="font-heading text-base font-bold text-primary">AIDLINE: Digital Health</h3>
+                                        <span class="text-[10px] px-2 py-0.5 rounded bg-primary/20 text-primary font-medium">Systems Analysis</span>
+                                    </div>
+                                    <ul class="text-xs text-muted-foreground space-y-2 mt-3 list-disc list-inside leading-relaxed">
+                                        <li>Formulated complete Software Requirements Specification (SRS) for digital healthcare and doctor consultation.</li>
+                                        <li>Conducted stakeholder analysis and designed DFDs, UML diagrams, and high-fidelity UI prototypes.</li>
+                                        <li>Defined functional requirements for appointment scheduling, e-prescriptions, and emergency response.</li>
+                                    </ul>
+                                </div>
+                                <div class="flex items-center gap-3 pt-4 border-t border-border/50">
+                                    <a href="https://github.com/eftekar1473" target="_blank" rel="noopener noreferrer"
+                                        class="flex-1 text-center py-2 px-3 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition shadow-sm">
+                                        GitHub Code
+                                    </a>
+                                    <a href="https://drive.google.com/file/d/1-Q-JY5X2VK8qYk-yQCnTEiTIYk3OxOz1/view?usp=drive_link" target="_blank" rel="noopener noreferrer"
+                                        class="flex-1 text-center py-2 px-3 rounded-lg border border-border bg-background/50 hover:bg-accent text-xs font-medium text-foreground transition">
+                                        SRS Document
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: NSTU-Anti-Narcotics-Society -->
+                    <div class="project-card relative h-[360px] w-full perspective-1000 cursor-pointer">
+                        <div class="card-inner relative h-full w-full transition-transform duration-700 transform-style-3d border border-border rounded-2xl bg-card shadow-lg hover:border-primary/50 transition-colors">
+                            <div class="card-front absolute inset-0 backface-hidden overflow-hidden rounded-2xl flex flex-col justify-between">
+                                <div class="relative h-44 w-full overflow-hidden">
+                                    <img alt="NSTU Anti-Narcotics Society" class="object-cover h-full w-full"
+                                        src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&amp;h=400&amp;fit=crop" />
+                                    <span class="absolute top-3 right-3 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-background/80 backdrop-blur-md text-primary border border-primary/20">
+                                        Community Portal
+                                    </span>
+                                </div>
+                                <div class="p-5 flex-1 flex flex-col justify-between bg-card">
+                                    <div>
+                                        <h3 class="font-heading text-lg font-bold text-foreground">NSTU-Anti-Narcotics-Society</h3>
+                                        <p class="mt-1 text-xs text-muted-foreground line-clamp-2">Official web platform for awareness campaigns, event notices, and society initiatives.</p>
+                                    </div>
+                                    <div class="pt-3 border-t border-border/40 flex items-center justify-between">
+                                        <div class="flex flex-wrap gap-1.5">
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">React</span>
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">Tailwind CSS</span>
+                                            <span class="text-[10px] px-2 py-0.5 rounded bg-muted text-foreground font-medium">Vercel</span>
+                                        </div>
+                                        <span class="text-[11px] text-primary flex items-center gap-1 font-medium">Details ↻</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-card border border-primary/60 p-6 flex flex-col justify-between text-left shadow-2xl">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="font-heading text-base font-bold text-primary">NSTU Anti-Narcotics Society</h3>
+                                        <span class="text-[10px] px-2 py-0.5 rounded bg-primary/20 text-primary font-medium">Full-Stack Web</span>
+                                    </div>
+                                    <ul class="text-xs text-muted-foreground space-y-2 mt-3 list-disc list-inside leading-relaxed">
+                                        <li>Interactive official web portal built for campus anti-drug advocacy and awareness programs.</li>
+                                        <li>Features event announcements, publication archives, and active member directory.</li>
+                                        <li>Deployed with continuous delivery on Vercel with responsive mobile-first UI.</li>
+                                    </ul>
+                                </div>
+                                <div class="flex items-center gap-3 pt-4 border-t border-border/50">
+                                    <a href="https://github.com/eftekar1473/NSTU-Anti-Narcotics-Society.git" target="_blank" rel="noopener noreferrer"
+                                        class="flex-1 text-center py-2 px-3 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition shadow-sm">
+                                        GitHub Code
+                                    </a>
+                                    <a href="https://nstu-anti-narcotics-society.vercel.app" target="_blank" rel="noopener noreferrer"
+                                        class="flex-1 text-center py-2 px-3 rounded-lg border border-border bg-background/50 hover:bg-accent text-xs font-medium text-foreground transition">
+                                        Demo
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-10 text-center">
-                    <button id="show-more-projects"
-                        class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none ring-offset-background border border-border bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-                        Show More
-                    </button>
+                <div class="mt-12 text-center">
+                    <a href="https://github.com/eftekar1473" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center rounded-xl text-sm font-semibold transition-all border border-border/80 bg-card/60 hover:bg-card hover:border-primary/50 text-foreground h-11 px-6 shadow-sm hover:scale-105 gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                        <span>View All Repositories on GitHub</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -444,43 +536,370 @@
         <!-- Skills Section -->
         <section id="skills" class="px-6 py-20 bg-muted/20">
             <div class="mx-auto max-w-6xl">
-                <div class="mb-12 text-center">
-                    <h2 class="font-heading text-2xl font-bold text-foreground sm:text-3xl">Cognitive Toolbox</h2>
-                    <p class="mt-2 text-sm text-muted-foreground">Syntax to Shape Digital Dreams.</p>
+                <!-- Section Header -->
+                <div class="mb-10 text-center max-w-2xl mx-auto">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
+                        Technical Arsenal
+                    </div>
+                    <h2 class="font-heading text-2xl font-bold text-foreground sm:text-3xl">Skills &amp; Technical Expertise</h2>
+                    <p class="mt-2 text-sm text-muted-foreground">Comprehensive overview of languages, frameworks, databases, and software QA testing tools from my coursework and projects.</p>
                 </div>
 
-                <div class="flex flex-col md:flex-row items-center justify-center gap-12">
-                    <!-- Left: Circular Nav (Increased Size) -->
-                    <div class="relative w-[340px] h-[340px] flex items-center justify-center">
-                        <!-- Central Icon -->
-                        <div class="absolute z-10 bg-primary/20 p-6 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="text-primary">
-                                <path d="M12 2v4" />
-                                <path d="m16.2 7.8 2.9-2.9" />
-                                <path d="M18 12h4" />
-                                <path d="m16.2 16.2 2.9 2.9" />
-                                <path d="M12 18v4" />
-                                <path d="m4.9 19.1 2.9-2.9" />
-                                <path d="M2 12h4" />
-                                <path d="m4.9 4.9 2.9 2.9" />
-                            </svg>
+                <!-- Category Filter Tabs -->
+                <div class="flex items-center justify-center gap-2 flex-wrap mb-10" id="skill-filter-tabs">
+                    <button class="skill-tab-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-primary text-primary-foreground shadow-md shadow-primary/20" data-filter="languages">
+                        Languages
+                    </button>
+                    <button class="skill-tab-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-card/60 border border-border/80 text-muted-foreground hover:text-foreground hover:border-primary/40" data-filter="web-mobile">
+                        Web &amp; Mobile
+                    </button>
+                    <button class="skill-tab-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-card/60 border border-border/80 text-muted-foreground hover:text-foreground hover:border-primary/40" data-filter="databases">
+                        Databases
+                    </button>
+                    <button class="skill-tab-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-card/60 border border-border/80 text-muted-foreground hover:text-foreground hover:border-primary/40" data-filter="testing">
+                        Testing &amp; QA
+                    </button>
+                    <button class="skill-tab-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-card/60 border border-border/80 text-muted-foreground hover:text-foreground hover:border-primary/40" data-filter="tools">
+                        Tools &amp; IDEs
+                    </button>
+                </div>
+
+                <!-- Skills Interactive Grid -->
+                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-full mx-auto" id="skills-grid">
+                    <!-- Languages -->
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="languages">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-10 h-10 object-contain" />
                         </div>
-                        <!-- Orbiting Buttons (Positioned via CSS/JS) -->
-                        <div id="skills-orbit" class="absolute inset-0 animate-spin-slow-reverse">
-                            <!-- Buttons will be injected here or styled via CSS class -->
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Python</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Programming</span>
                         </div>
                     </div>
 
-                    <!-- Right: Content -->
-                    <div id="skills-content" class="flex-1 w-full max-w-4xl transition-all duration-300">
-                        <h3 class="text-xl font-bold text-foreground mb-6 hidden" id="skill-category-title">Select a
-                            Category
-                        </h3>
-                        <div class="flex flex-wrap gap-3" id="skill-list">
-                            <!-- Skills injected via JS -->
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="languages">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="w-10 h-10 object-contain" />
                         </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Java</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">OOP &amp; Swing</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="languages">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">C++</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Data Structures</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="languages">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">C</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Systems</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="languages">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">JavaScript</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">ES6+ / Web</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="languages">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Dart</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Mobile Lang</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="languages">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">HTML5</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Semantic Web</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="languages">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">CSS3</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Responsive UI</span>
+                        </div>
+                    </div>
+
+                    <!-- Web & Mobile -->
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="web-mobile">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Flutter</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Cross-Platform App</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="web-mobile">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">React</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Frontend Framework</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="web-mobile">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Node.js</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Backend Runtime</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="web-mobile">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js" class="w-10 h-10 object-contain" style="filter: brightness(0) invert(1);" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Express.js</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">REST APIs</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="web-mobile">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Tailwind CSS</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Modern Styling</span>
+                        </div>
+                    </div>
+
+                    <!-- Databases -->
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="databases">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">PostgreSQL</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Relational Database</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="databases">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">MySQL</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">SQL Architecture</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="databases">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">MongoDB</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">NoSQL Schemas</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="databases">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Firebase</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Auth &amp; Cloud</span>
+                        </div>
+                    </div>
+
+                    <!-- Software Testing & QA -->
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="testing">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" alt="Selenium" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Selenium</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Automation QA</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="testing">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Postman</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">API Testing &amp; CI</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="testing">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <div class="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 flex items-center justify-center font-bold text-xs">
+                                JUnit
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">JUnit</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Unit Testing</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="testing">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs">
+                                TestNG
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">TestNG</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">QA Framework</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="testing">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-500 flex items-center justify-center font-bold text-xs">
+                                JMeter
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">JMeter</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Performance Testing</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="testing">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">
+                                Appium
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Appium</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Mobile QA</span>
+                        </div>
+                    </div>
+
+                    <!-- Development Tools & IDEs -->
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="tools">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Git</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Version Control</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="tools">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="w-10 h-10 object-contain invert dark:invert-0" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">GitHub</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Collaboration &amp; CI</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="tools">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" alt="Android Studio" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Android Studio</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Mobile IDE</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="tools">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" alt="IntelliJ IDEA" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">IntelliJ IDEA</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Java IDE</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="tools">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg" alt="PyCharm" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">PyCharm</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Python IDE</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group p-4 rounded-2xl border border-border/70 bg-card/50 hover:bg-card/90 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 transform hover:-translate-y-1" data-category="tools">
+                        <div class="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" class="w-10 h-10 object-contain" />
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">VS Code</h4>
+                            <span class="text-[10px] text-muted-foreground font-medium">Code Editor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Engineering Practices & Methodologies Bento -->
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="p-6 rounded-2xl border border-border/80 bg-card/40 backdrop-blur-md flex flex-col items-center text-center">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mb-4 mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg>
+                        </div>
+                        <h3 class="font-heading text-base font-bold text-foreground mb-2">Software Engineering</h3>
+                        <p class="text-xs text-muted-foreground leading-relaxed">
+                            Formulation of formal Software Requirements Specifications (SRS), Data Flow Diagrams (DFD), and UML Use-Case modeling.
+                        </p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl border border-border/80 bg-card/40 backdrop-blur-md flex flex-col items-center text-center">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mb-4 mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path><path d="m9 12 2 2 4-4"></path></svg>
+                        </div>
+                        <h3 class="font-heading text-base font-bold text-foreground mb-2">Testing &amp; Verification</h3>
+                        <p class="text-xs text-muted-foreground leading-relaxed">
+                            Automated functional testing, regression testing, API performance verification with Selenium, JUnit, Postman, and JMeter.
+                        </p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl border border-border/80 bg-card/40 backdrop-blur-md flex flex-col items-center text-center">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mb-4 mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M9 3v18"></path><path d="m14 9 3 3-3 3"></path></svg>
+                        </div>
+                        <h3 class="font-heading text-base font-bold text-foreground mb-2">Systems &amp; Architecture</h3>
+                        <p class="text-xs text-muted-foreground leading-relaxed">
+                            Clean RESTful API contracts, role-based access security, normalized SQL schemas, and responsive cross-platform apps.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -660,176 +1079,237 @@
         
 
         <!-- Contact Section -->
-     
-        <section id="contact" class="px-6 py-24 bg-muted/20">
-        <div class="mx-auto max-w-6xl">
+        <section id="contact" class="px-4 sm:px-6 py-10 lg:py-14 bg-muted/20 flex flex-col justify-center min-h-[calc(100vh-4rem)]">
+            <div class="mx-auto max-w-6xl w-full">
 
-            <!-- Section Header -->
-            <div class="mb-12 max-w-xl">
-            <h2 class="text-3xl font-bold text-foreground mb-3">
-                Let’s build something great
-            </h2>
-            <p class="text-muted-foreground text-sm">
-                Ideas don’t belong in notes — they belong in the real world.<br>
-                If you’ve got one, let’s build it together.
-            </p>
-            </div>
-
-            <!-- GRID -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-
-            <!-- LEFT: FORM -->
-            <div class="rounded-2xl border border-border bg-card/50 p-6 shadow-sm hover:shadow-md transition-all">
-
-                <h3 class="text-xl font-bold mb-6 text-foreground">
-                Send a Message
-                </h3>
-
-                <form class="flex flex-col gap-6">
-
-                <!-- INPUTS -->
-                <div class="flex flex-col gap-5">
-
-                    <!-- Name -->
-                    <div class="flex flex-col gap-2">
-                    <label class="text-sm font-medium text-foreground">Name</label>
-                    <input
-                        type="text"
-                        placeholder="Your Name"
-                        class="h-11 w-full rounded-lg border border-input bg-background px-4 text-sm focus:ring-2 focus:ring-primary outline-none"
-                    />
+                <!-- Section Header -->
+                <div class="mb-5 sm:mb-6 max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+                        Get In Touch
                     </div>
-
-                    <!-- Email -->
-                    <div class="flex flex-col gap-2">
-                    <label class="text-sm font-medium text-foreground">Email</label>
-                    <input
-                        type="email"
-                        placeholder="your.email@example.com"
-                        class="h-11 w-full rounded-lg border border-input bg-background px-4 text-sm focus:ring-2 focus:ring-primary outline-none"
-                    />
-                    </div>
-
-                    <!-- Message -->
-                    <div class="flex flex-col gap-2">
-                    <label class="text-sm font-medium text-foreground">Message</label>
-                    <textarea
-                        rows="4"
-                        placeholder="Tell me about your project..."
-                        class="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none resize-none"
-                    ></textarea>
-                    </div>
-
-                </div>
-
-                <!-- BUTTON -->
-                <button
-                    type="submit"
-                    class="inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-primary-foreground px-6 h-11 text-sm font-semibold shadow-lg shadow-primary/20 hover:scale-[1.02] hover:bg-primary/90 transition-all active:scale-[0.98]"
-                >
-                    Send Message →
-                </button>
-
-                </form>
-            </div>
-
-            <!-- RIGHT: CONTACT + SOCIAL -->
-            <div class="flex flex-col gap-6">
-
-                <!-- CONTACT INFO -->
-                <div class="rounded-2xl border border-border bg-card/50 p-6 shadow-sm hover:shadow-md transition-all">
-
-                <h3 class="text-lg font-bold mb-4 text-foreground">
-                    Contact Info
-                </h3>
-
-                <p class="text-sm text-muted-foreground mb-6">
-                    Prefer direct communication? Reach me here.
-                </p>
-
-                <div class="flex flex-col gap-4">
-
-                    <!-- WhatsApp -->
-                    <a href="https://wa.me/8801400095352" target="_blank"
-                    class="flex items-center gap-3 p-3 rounded-lg border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all">
-
-                    <i data-lucide="message-circle" class="w-5 h-5 text-green-500"></i>
-
-                    <div>
-                        <p class="text-xs text-muted-foreground">WhatsApp</p>
-                        <p class="text-sm font-medium text-foreground">+880 1844 898024</p>
-                    </div>
-                    </a>
-
-                    <!-- Telegram -->
-                    <a href="https://t.me/eftekar1473" target="_blank"
-                    class="flex items-center gap-3 p-3 rounded-lg border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all">
-
-                    <i data-lucide="send" class="w-5 h-5 text-sky-500"></i>
-
-                    <div>
-                        <p class="text-xs text-muted-foreground">Telegram</p>
-                        <p class="text-sm font-medium text-foreground">@eftekar1473</p>
-                    </div>
-                    </a>
-
-                    <!-- Email -->
-                    <a href="mailto:eftekarhossen3223@gmail.com"
-                    class="flex items-center gap-3 p-3 rounded-lg border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all">
-
-                    <i data-lucide="mail" class="w-5 h-5 text-red-500"></i>
-
-                    <div>
-                        <p class="text-xs text-muted-foreground">Email</p>
-                        <p class="text-sm font-medium text-foreground">eftekarhossen3223@gmail.com</p>
-                    </div>
-                    </a>
-
-                </div>
-                </div>
-
-                <!-- FOLLOW ME -->
-                <div class="rounded-2xl border border-border bg-card/50 p-6 shadow-sm hover:shadow-md transition-all">
-
-                <div class="mb-5">
-                    <h3 class="text-lg font-bold mb-2 text-foreground">
-                    Follow Me
-                    </h3>
-                    <p class="text-sm text-muted-foreground">
-                    Let’s connect and share ideas.
+                    <h2 class="text-2xl sm:text-3xl font-bold text-foreground mb-1.5 font-heading">
+                        Let’s build something great together
+                    </h2>
+                    <p class="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                        Have an innovative project, an internship opportunity, or a technical inquiry? Send me a message or connect through any of my direct channels.
                     </p>
                 </div>
 
-                <!-- SOCIAL ICONS -->
-                <div class="flex gap-4 flex-wrap">
+                <!-- GRID: EQUAL SIGHT / HEIGHT ON BOTH SIDES -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
 
-                    <a href="https://linkedin.com" target="_blank"
-                    class="w-12 h-12 flex items-center justify-center rounded-lg border border-border/50 hover:border-blue-600 hover:bg-blue-600/10 transition-all">
-                    <i data-lucide="linkedin" class="w-5 h-5 text-blue-600"></i>
-                    </a>
+                    <!-- LEFT: FORM (EQUAL HEIGHT) -->
+                    <div class="rounded-3xl border border-border/80 bg-card/60 backdrop-blur-xl p-5 sm:p-6 shadow-xl flex flex-col justify-between h-full hover:border-primary/40 transition-colors">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-lg sm:text-xl font-bold text-foreground font-heading">
+                                        Send a Message
+                                    </h3>
+                                    <p class="text-xs text-muted-foreground mt-0.5">
+                                        Delivered directly to eftekarhossen3223@gmail.com
+                                    </p>
+                                </div>
+                                <div class="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center">
+                                    <i data-lucide="send" class="w-4 h-4"></i>
+                                </div>
+                            </div>
 
-                    <a href="https://github.com" target="_blank"
-                    class="w-12 h-12 flex items-center justify-center rounded-lg border border-border/50 hover:border-foreground hover:bg-primary/10 transition-all">
-                    <i data-lucide="github" class="w-5 h-5"></i>
-                    </a>
+                            <form id="contact-form" action="https://formsubmit.co/eftekarhossen3223@gmail.com" method="POST" class="flex flex-col gap-3">
+                                <!-- Anti-spam & Formsubmit configuration -->
+                                <input type="hidden" name="_captcha" value="false" />
+                                <input type="hidden" name="_template" value="table" />
+                                <input type="text" name="_honey" style="display:none" />
+                                <input type="hidden" name="_subject" value="New Portfolio Contact from Eftekar Hossen Website" />
 
-                    <a href="https://facebook.com" target="_blank"
-                    class="w-12 h-12 flex items-center justify-center rounded-lg border border-border/50 hover:border-blue-500 hover:bg-blue-500/10 transition-all">
-                    <i data-lucide="facebook" class="w-5 h-5 text-blue-500"></i>
-                    </a>
+                                <!-- Inputs -->
+                                <div class="flex flex-col gap-2.5">
+                                    <!-- Name -->
+                                    <div class="flex flex-col gap-1">
+                                        <label for="contact-name" class="text-xs font-semibold text-foreground flex items-center justify-between">
+                                            <span>Your Name</span>
+                                            <span class="text-[11px] text-primary font-normal">*Required</span>
+                                        </label>
+                                        <input
+                                            id="contact-name"
+                                            name="name"
+                                            type="text"
+                                            required
+                                            placeholder="e.g. John Doe"
+                                            class="w-full rounded-xl border border-input bg-background/80 px-3.5 py-2 text-xs sm:text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-muted-foreground/60 text-foreground"
+                                        />
+                                    </div>
 
-                    <a href="https://twitter.com" target="_blank"
-                    class="w-12 h-12 flex items-center justify-center rounded-lg border border-border/50 hover:border-sky-400 hover:bg-sky-400/10 transition-all">
-                    <i data-lucide="twitter" class="w-5 h-5 text-sky-400"></i>
-                    </a>
+                                    <!-- Email -->
+                                    <div class="flex flex-col gap-1">
+                                        <label for="contact-email" class="text-xs font-semibold text-foreground flex items-center justify-between">
+                                            <span>Your Email</span>
+                                            <span class="text-[11px] text-primary font-normal">*Required</span>
+                                        </label>
+                                        <input
+                                            id="contact-email"
+                                            name="email"
+                                            type="email"
+                                            required
+                                            placeholder="you@example.com"
+                                            class="w-full rounded-xl border border-input bg-background/80 px-3.5 py-2 text-xs sm:text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-muted-foreground/60 text-foreground"
+                                        />
+                                    </div>
+
+                                    <!-- Subject -->
+                                    <div class="flex flex-col gap-1">
+                                        <label for="contact-subject" class="text-xs font-semibold text-foreground">
+                                            Subject <span class="text-[11px] text-muted-foreground font-normal">(Optional)</span>
+                                        </label>
+                                        <input
+                                            id="contact-subject"
+                                            name="subject"
+                                            type="text"
+                                            placeholder="Project collaboration, hiring, or question"
+                                            class="w-full rounded-xl border border-input bg-background/80 px-3.5 py-2 text-xs sm:text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-muted-foreground/60 text-foreground"
+                                        />
+                                    </div>
+
+                                    <!-- Message -->
+                                    <div class="flex flex-col gap-1">
+                                        <label for="contact-message" class="text-xs font-semibold text-foreground flex items-center justify-between">
+                                            <span>Your Message</span>
+                                            <span class="text-[11px] text-primary font-normal">*Required</span>
+                                        </label>
+                                        <textarea
+                                            id="contact-message"
+                                            name="message"
+                                            rows="3"
+                                            required
+                                            placeholder="Hello Eftekar, I would like to talk about..."
+                                            class="w-full rounded-xl border border-input bg-background/80 px-3.5 py-2 text-xs sm:text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none resize-none transition-all placeholder:text-muted-foreground/60 text-foreground"
+                                        ></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Live Status Feedback Container -->
+                                <div id="contact-form-status" class="hidden"></div>
+
+                                <!-- SUBMIT BUTTON -->
+                                <button
+                                    type="submit"
+                                    id="contact-submit-btn"
+                                    class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-primary-foreground h-11 text-xs sm:text-sm font-semibold shadow-lg shadow-primary/25 hover:bg-primary/90 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer mt-1"
+                                >
+                                    <span id="submit-btn-text" class="flex items-center gap-2">
+                                        <span>Send Message</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                    </span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: STYLISH CONTACT INFO -->
+                    <div class="rounded-3xl border border-border/80 bg-card/60 backdrop-blur-xl p-5 sm:p-6 shadow-xl flex flex-col justify-between h-full hover:border-primary/40 transition-colors relative overflow-hidden">
+                        <div>
+                            <!-- Availability Pill Badge -->
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold w-fit mb-3">
+                                <span class="relative flex h-2 w-2">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                </span>
+                                <span>Available for New Opportunities</span>
+                            </div>
+
+                            <h3 class="text-lg sm:text-xl font-bold text-foreground font-heading mb-1.5">
+                                Contact Information
+                            </h3>
+
+                            <p class="text-xs text-muted-foreground leading-relaxed mb-4">
+                                Prefer direct messaging or a quick chat? Reach out through any of these verified channels and I'll respond as soon as possible.
+                            </p>
+
+                            <!-- Modern Interactive Channel Cards -->
+                            <div class="flex flex-col gap-2.5">
+
+                                <!-- WhatsApp -->
+                                <a href="https://wa.me/8801844898024" target="_blank" rel="noopener noreferrer"
+                                    class="group flex items-center justify-between p-3 rounded-2xl border border-border/70 bg-background/50 hover:bg-emerald-500/10 hover:border-emerald-500/40 transition-all duration-300">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="text-xs font-semibold text-foreground group-hover:text-emerald-400 transition-colors">WhatsApp</p>
+                                                <span class="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 font-medium">Fastest</span>
+                                            </div>
+                                            <p class="text-xs font-medium text-muted-foreground mt-0.5">+880 1844 898024</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-semibold text-emerald-400 group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                                        <span>Chat</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                    </span>
+                                </a>
+
+                                <!-- Telegram -->
+                                <a href="https://t.me/eftekar1473" target="_blank" rel="noopener noreferrer"
+                                    class="group flex items-center justify-between p-3 rounded-2xl border border-border/70 bg-background/50 hover:bg-sky-500/10 hover:border-sky-500/40 transition-all duration-300">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-500/30 text-sky-400 flex items-center justify-center group-hover:bg-sky-500 group-hover:text-black transition-all">
+                                            <i data-lucide="send" class="w-4 h-4"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="text-xs font-semibold text-foreground group-hover:text-sky-400 transition-colors">Telegram</p>
+                                                <span class="text-[10px] px-1.5 py-0.2 rounded bg-sky-500/10 text-sky-400 font-medium">Direct</span>
+                                            </div>
+                                            <p class="text-xs font-medium text-muted-foreground mt-0.5">@eftekar1473</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-semibold text-sky-400 group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                                        <span>Message</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                    </span>
+                                </a>
+
+                                <!-- Email -->
+                                <a href="mailto:eftekarhossen3223@gmail.com"
+                                    class="group flex items-center justify-between p-3 rounded-2xl border border-border/70 bg-background/50 hover:bg-primary/10 hover:border-primary/40 transition-all duration-300">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-xl bg-primary/15 border border-primary/30 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-all">
+                                            <i data-lucide="mail" class="w-4 h-4"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <p class="text-xs font-semibold text-foreground group-hover:text-primary transition-colors">Official Email</p>
+                                                <span class="text-[10px] px-1.5 py-0.2 rounded bg-primary/10 text-primary font-medium">Inquiries</span>
+                                            </div>
+                                            <p class="text-xs font-medium text-muted-foreground mt-0.5 break-all">eftekarhossen3223@gmail.com</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-semibold text-primary group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                                        <span>Email</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                    </span>
+                                </a>
+
+                                <!-- Location & University Info -->
+                                <div class="flex items-center gap-3 p-3 rounded-2xl border border-border/70 bg-background/50">
+                                    <div class="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-semibold text-foreground">Location &amp; Education</p>
+                                        <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                                            Chawkbazar, Chattogram &bull; Noakhali Science and Technology University (NSTU)
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
-
-                </div>
-
             </div>
-            </div>
-        </div>
         </section>
 
 
